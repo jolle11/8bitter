@@ -2,7 +2,7 @@ import ImageConverter from "./components/ImageConverter/ImageConverter";
 
 function App() {
 	return (
-		<div>
+		<div className="content">
 			<ImageConverter />
 		</div>
 	);

@@ -1,0 +1,44 @@
+.converter {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	&__title {}
+
+	&__upload {
+		border: none;
+	}
+
+	&__images {
+		display: flex;
+	}
+
+	&__original {
+		display: flex;
+		flex-direction: column
+	}
+
+	&__subtitle {
+		text-align: center;
+	}
+
+	&__image {
+		&--original {}
+
+		&--converted {}
+	}
+
+	&__converted {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__button {
+		&--download {}
+
+		&--generate {}
+	}
+
+	&__generate {}
+}
