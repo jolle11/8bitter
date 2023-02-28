@@ -1,0 +1,71 @@
+.footer {
+	padding-top: 20vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	&__text {
+		text-align: center;
+	}
+
+	&__info {
+		text-align: center;
+		font-size: 11px;
+		padding: 5px 0;
+
+		&--link {
+			text-decoration: none;
+			color: black;
+		}
+	}
+
+	&__links {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	&__link {
+		font-size: 25px;
+		color: black;
+		margin: 5px;
+		transition: color 0.2s ease;
+
+		&:hover {
+			color: #202020;
+		}
+
+		&--linkedin {
+			transition: color 0.2s ease;
+
+			&:hover {
+				color: #0a66c2;
+			}
+		}
+
+		&--hashnode {
+			transition: color 0.2s ease;
+
+			&:hover {
+				color: #2962ff;
+			}
+		}
+
+		&--twitter {
+			transition: color 0.2s ease;
+
+			&:hover {
+				color: #1d9bf0;
+			}
+		}
+
+		&--instagram {
+			transition: color 0.2s ease;
+
+			&:hover {
+				color: #fe0a64;
+			}
+		}
+	}
+}
