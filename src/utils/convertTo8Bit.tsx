@@ -1,27 +1,32 @@
 export const convertTo8Bit = (image: File): Promise<Uint8ClampedArray> => {
 	return new Promise((resolve, reject) => {
-		// Cargar la imagen en un objeto Image de JavaScript
+		// Load the image into a JavaScript Image object
 		const img = new Image();
 		img.src = URL.createObjectURL(image);
 
-		// Esperar a que se cargue la imagen
+		// Wait till image is loaded
 		img.onload = () => {
-			// Crear un canvas para dibujar la imagen
+			// Create canvas to draw image
 			const canvas = document.createElement("canvas");
 			const context = canvas.getContext("2d");
 
-			// Establecer el tamaño del canvas para que sea igual al tamaño de la imagen
+			// Set the canvas size to be equal to the image size
 			canvas.width = img.width;
 			canvas.height = img.height;
 
-			// Dibujar la imagen en el canvas
-			context.drawImage(img, 0, 0);
+			// Draw image on canvas
+			context!.drawImage(img, 0, 0);
 
-			// Obtener los píxeles de la imagen a través del contexto del canvas
-			const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+			// Get image pixels through the context of the canvas
+			const imageData = context!.getImageData(
+				0,
+				0,
+				canvas.width,
+				canvas.height,
+			);
 			const pixels = imageData.data;
 
-			// Iterar sobre cada píxel y convertir su valor RGB a un valor de 8 bits
+			// Iterate over each pixel and convert its RGB value to an 8-bit value.
 			for (let i = 0; i < pixels.length; i += 4) {
 				const r = pixels[i];
 				const g = pixels[i + 1];
@@ -33,14 +38,14 @@ export const convertTo8Bit = (image: File): Promise<Uint8ClampedArray> => {
 				pixels[i + 2] = value; // B
 			}
 
-			// Dibujar el nuevo valor de 8 bits en un nuevo canvas
+			// Draw the new 8-bit value on a new canvas
 			const newCanvas = document.createElement("canvas");
 			const newContext = newCanvas.getContext("2d");
 			newCanvas.width = canvas.width;
 			newCanvas.height = canvas.height;
-			newContext.putImageData(imageData, 0, 0);
+			newContext!.putImageData(imageData, 0, 0);
 
-			// Convertir el nuevo canvas a una imagen
+			// Convert the new canvas into an image
 			newCanvas.toBlob(
 				(blob) => {
 					if (blob) {
@@ -60,7 +65,7 @@ export const convertTo8Bit = (image: File): Promise<Uint8ClampedArray> => {
 			);
 		};
 
-		// Manejar el error si no se pudo cargar la imagen
+		// Handle error if image couldn't be loaded
 		img.onerror = (error) => {
 			reject(new Error(`Failed to load image: ${error}`));
 		};

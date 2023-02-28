@@ -13,7 +13,7 @@ const ImageConverter = () => {
 		}
 	};
 
-	const handleGenerate = async () => {
+	const handleImageGenerate = async () => {
 		if (image) {
 			try {
 				const data = await convertTo8Bit(image);
@@ -24,7 +24,7 @@ const ImageConverter = () => {
 		}
 	};
 
-	const handleDownload = () => {
+	const handleImageDownload = () => {
 		if (converted) {
 			const link = document.createElement("a");
 			link.download = "8bit_image.jpg";
@@ -38,8 +38,8 @@ const ImageConverter = () => {
 	return (
 		<div className="converter">
 			<h1 className="converter__title">8bitter</h1>
-			<label for="file-upload" class="converter__upload">
-				Choose file
+			<label htmlFor="file-upload" className="converter__upload">
+				{image ? "Choose another file" : "Choose file"}
 			</label>
 			<input
 				id="file-upload"
@@ -55,8 +55,7 @@ const ImageConverter = () => {
 						<img
 							src={URL.createObjectURL(image)}
 							alt="Original"
-							width={300}
-							className="converter__image converter__image--original"
+							className="converter__image"
 						/>
 					</section>
 				)}
@@ -66,26 +65,19 @@ const ImageConverter = () => {
 						<img
 							src={converted}
 							alt="8-bit converted"
-							width={300}
-							className="converter__image converter__image--converted"
+							className="converter__image"
 						/>
 					</section>
 				)}
 			</div>
 			<div className="converter__buttons">
 				{image && !converted && (
-					<button
-						className="converter__button converter__button--generate"
-						onClick={handleGenerate}
-					>
+					<button className="converter__button" onClick={handleImageGenerate}>
 						Generate
 					</button>
 				)}
 				{converted && (
-					<button
-						className="converter__button converter__button--download"
-						onClick={handleDownload}
-					>
+					<button className="converter__button" onClick={handleImageDownload}>
 						Download
 					</button>
 				)}
