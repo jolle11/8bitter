@@ -28,14 +28,12 @@ export const convertTo8Bit = (image: File): Promise<Uint8ClampedArray> => {
 
 			// Iterate over each pixel and convert its RGB value to an 8-bit value.
 			for (let i = 0; i < pixels.length; i += 4) {
-				const r = pixels[i];
-				const g = pixels[i + 1];
-				const b = pixels[i + 2];
-				const gray = (r + g + b) / 3;
-				const value = Math.floor(gray / 32) * 32;
-				pixels[i] = value; // R
-				pixels[i + 1] = value; // G
-				pixels[i + 2] = value; // B
+				const r = Math.round(pixels[i] / 32) * 32;
+				const g = Math.round(pixels[i + 1] / 32) * 32;
+				const b = Math.round(pixels[i + 2] / 32) * 32;
+				pixels[i] = r; // R
+				pixels[i + 1] = g; // G
+				pixels[i + 2] = b; // B
 			}
 
 			// Draw the new 8-bit value on a new canvas
