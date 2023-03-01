@@ -5,6 +5,8 @@ import React, { useState } from "react";
 const ImageConverter = () => {
 	const [image, setImage] = useState<File | null>(null);
 	const [converted, setConverted] = useState<string | null>(null);
+	const [conversionQuality, setConversionQuality] = useState<number | null>(1);
+	const [timesGenerated, setTimesGenerated] = useState<number | null>(1);
 
 	const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files?.[0]) {
@@ -14,9 +16,10 @@ const ImageConverter = () => {
 	};
 
 	const handleImageGenerate = async () => {
+		setTimesGenerated(timesGenerated! + 1);
 		if (image) {
 			try {
-				const data = await convertTo8Bit(image);
+				const data = await convertTo8Bit(image, conversionQuality!);
 				setConverted(URL.createObjectURL(new Blob([data])));
 			} catch (error) {
 				console.error(error);
@@ -70,11 +73,38 @@ const ImageConverter = () => {
 					</section>
 				)}
 			</div>
+			{/*
+			======================================================
+			======================= BUTTONS ======================
+			======================================================
+			*/}
 			<div className="converter__buttons">
-				{image && !converted && (
-					<button className="converter__button" onClick={handleImageGenerate}>
-						Generate
-					</button>
+				{image && (
+					<>
+						<button
+							className="converter__button"
+							onClick={() => {
+								setImage(null);
+								setConverted(null);
+								setTimesGenerated(1);
+							}}
+						>
+							Remove image/s
+						</button>
+						<button className="converter__button" onClick={handleImageGenerate}>
+							{timesGenerated === 1 ? "Generate" : "Re-generate"}
+						</button>
+						<p className="converter__quality">Output quality:</p>
+						<input
+							type="number"
+							min={0}
+							max={1}
+							step="0.01"
+							defaultValue={conversionQuality as number}
+							onChange={(e) => setConversionQuality(Number(e.target.value))}
+							className="converter__input"
+						/>
+					</>
 				)}
 				{converted && (
 					<button className="converter__button" onClick={handleImageDownload}>
