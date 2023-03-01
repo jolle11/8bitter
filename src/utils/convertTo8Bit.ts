@@ -1,4 +1,7 @@
-export const convertTo8Bit = (image: File): Promise<Uint8ClampedArray> => {
+export const convertTo8Bit = (
+	image: File,
+	quality: number = 1, // default quality is set to 1
+): Promise<Uint8ClampedArray> => {
 	return new Promise((resolve, reject) => {
 		// Load the image into a JavaScript Image object
 		const img = new Image();
@@ -58,8 +61,8 @@ export const convertTo8Bit = (image: File): Promise<Uint8ClampedArray> => {
 						reject(new Error("Failed to convert image to 8-bit."));
 					}
 				},
-				"image/png",
-				1,
+				"image/jpeg",
+				quality,
 			);
 		};
 
