@@ -10,8 +10,8 @@ export const convertTo8Bit = (
 		// Wait till image is loaded
 		img.onload = () => {
 			// Create canvas to draw image
-			const canvas = document.createElement("canvas");
-			const context = canvas.getContext("2d");
+			const canvas = document.createElement('canvas');
+			const context = canvas.getContext('2d');
 
 			// Set the canvas size to be equal to the image size
 			canvas.width = img.width;
@@ -40,8 +40,8 @@ export const convertTo8Bit = (
 			}
 
 			// Draw the new 8-bit value on a new canvas
-			const newCanvas = document.createElement("canvas");
-			const newContext = newCanvas.getContext("2d");
+			const newCanvas = document.createElement('canvas');
+			const newContext = newCanvas.getContext('2d');
 			newCanvas.width = canvas.width;
 			newCanvas.height = canvas.height;
 			newContext!.putImageData(imageData, 0, 0);
@@ -58,10 +58,10 @@ export const convertTo8Bit = (
 							resolve(bytes);
 						};
 					} else {
-						reject(new Error("Failed to convert image to 8-bit."));
+						reject(new Error('Failed to convert image to 8-bit.'));
 					}
 				},
-				"image/jpeg",
+				'image/jpeg',
 				quality,
 			);
 		};
